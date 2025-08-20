@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Upcoming Events - Grand Egyptian Museum</title>
+    <style>
+        :root {
+            --brown: #6e4a2f;
+            --brown-dark: #5a3b25;
+            --light: #f5f2ef;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* Top bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--brown-dark);
+            padding: 10px 30px;
+            color: white;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .top-bar .center img {
+            height: 50px;
+        }
+
+        .top-bar .left,
+        .top-bar .right {
+            flex: 1;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--brown);
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: orange;
+        }
+
+        /* Page content */
+        .wrap {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .title-row h1 {
+            font-size: 28px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--brown);
+            padding-bottom: 3px;
+        }
+
+        .view-all {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .view-all-circle {
+            border: 1px solid #333;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .divider {
+            height: 2px;
+            background: var(--brown);
+            opacity: 0.25;
+            margin: 5px 0 20px;
+        }
+
+        .hero-container {
+            position: relative;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            position: absolute;
+            left: 30px;
+            bottom: 20px;
+            color: #fff;
+            max-width: 90%;
+        }
+
+        .hero-text h2 {
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .hero-text h2::before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #fff;
+        }
+
+        .hero-text p {
+            font-size: 13px;
+            max-width: 500px;
+            margin-bottom: 10px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .hero-buttons a {
+            padding: 8px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btn-light {
+            background: #fff;
+            color: #333;
+        }
+
+        .btn-dark {
+            background: var(--brown);
+            color: #fff;
+        }
+
+        .progress-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .bar {
+            flex: 1;
+            height: 4px;
+            background: #ccc;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: var(--brown);
+            border-radius: 4px;
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot-btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: none;
+            background: #ccc;
+            cursor: pointer;
+        }
+
+        .dot-btn.active {
+            background: var(--brown);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: 10px;
+        }
+
+        .grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .grid div:last-child {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top bar -->
+    <div class="top-bar">
+        <div class="left"><a href="home.html">Search</a></div>
+        <div class="center"><img src="https://upload.wikimedia.org/wikipedia/ar/d/d2/GEM_Logo.png" alt="Grand Egyptian Museum Logo"></div>
+        <div class="right"><a href="booking.html">Book Ticket</a></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="visit.html">Visit</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="opening.html">Opening</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="follow us.html">FolloW Us</a>
+    </nav>
+
+    <div class="wrap">
+        <div class="title-row">
+            <h1>Upcoming Events</h1>
+            <a href="Events.html" class="view-all">
+                view all <span class="view-all-circle">●</span>
+            </a>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="hero-container">
+            <div class="hero">
+                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRl7kDoSULu5uwHMJHUHn4QhnZD8caoEGCm_1IGja_WFSoXuFmV" alt="">
+                <div class="hero-text">
+                    <h2>History of the Great King</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus.</p>
+                    <div class="hero-buttons">
+                        <a href="timeline.html" class="btn-light">Know More</a>
+                        <a href="booking.html" class="btn-dark">Book Ticket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="bar"></div>
+            <div class="dots">
+                <button class="dot-btn active"></button>
+                <button class="dot-btn"></button>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div><img src="https://www.alaraby.com/sites/default/files/styles/d08_standard/public/2024-04/GettyImages-1243551400.jpg?h=199d8c1f&itok=eLwwCYVy" alt=""></div>
+            <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfIHqkwrHlbMJbMPQXIZGWjlNIe4bDhMldLkwJEbkQ7h6kVDwl" alt=""></div>
+            <div><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRjvPx7pW4x9jEMAIAjxHob8wfvf1j00WI2UElhBUlLRGGoeSrJ" alt=""></div>
+            <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsyqrirFNnywg7Cku7uRf6sGt7oAYq5V7yJOk8r-BlHxhDJ6Jy" alt=""></div>
+            <div><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_c_q3drRRbmvdlG1dqA6gmsCE70wJiJi8IpAnouC028-vNST0" alt=""></div>
+            <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH2nAH-Z_7NxqdKSSZWAMEGP9Z8QtzPiledJS23La-S8zxs6i1" alt=""></div>
+            <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkTqIfPUCUUichw-6mcwZCbZ64MzFk3C8KVlxes4y-AITy8O7VozGLfub6AbGfM_kmCvU&usqp=CAU" alt=""></div>
+        </div>
+    </div>
+</body>
+
+</html>

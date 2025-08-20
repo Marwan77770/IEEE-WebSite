@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grand Egyptian Museum</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-image: url('https://www.safha1.com/UploadCache/libfiles/0/3/800x450o/647.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      font-weight: bold;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #5c4026;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #3a2616;
+    }
+
+    .footer {
+      background-color: #5c4026;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer-bar {
+      background-color: #3a2616;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-weight: bold;
+    }
+
+    .footer-bar a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .footer-bar a:hover {
+      text-decoration: underline;
+    }
+
+    input {
+      width: 60%;
+      max-width: 400px;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #signup-section {
+      display: none;
+    }
+  </style>
+  <script>
+    function goToSignup() {
+      document.getElementById("opening-section").style.display = "none";
+      document.getElementById("signup-section").style.display = "block";
+      window.scrollTo(0,0);
+    }
+
+    function goBack() {
+      document.getElementById("signup-section").style.display = "none";
+      document.getElementById("opening-section").style.display = "block";
+      window.scrollTo(0,0);
+    }
+  </script>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="visit.html">Visit</a>
+      <a href="Events.html">Events</a>
+      <a href="about.html">About</a>
+      <a href="opening.html">Opening</a>
+      <a href="timeline.html">Timeline</a>
+      <a href="follow us.html">FolloW Us</a>>
+    </nav>
+  </header>
+
+  <section id="opening-section" class="section">
+    <h1>OPENING ANNOUNCEMENT</h1>
+    <p>Check back here for official updates about the Grand Egyptian Museum opening announcement.</p>
+    <h2>Anticipated Full Opening: Mid-2024</h2>
+    <button class="btn" onclick="goToSignup()">Sign Up To Be Notified</button>
+  </section>
+
+  <section id="signup-section" class="section">
+    <h1>SIGN UP TO BE NOTIFIED</h1>
+    <form>
+      <input type="email" placeholder="Email" required><br>
+      <input type="text" placeholder="First Name" required><br>
+      <input type="text" placeholder="Last Name" required><br>
+      <input type="tel" placeholder="Phone"><br>
+      <input type="text" placeholder="Country of Residence"><br>
+      <button class="btn" type="submit">Sign Up</button>
+    </form>
+    <button class="btn" onclick="goBack()">Back to Opening</button>
+  </section>
+
+  <footer class="footer">
+    <p>© 2024 Grand Egyptian Museum | Powered by Shopify</p>
+    <p>Follow us: Facebook | Instagram | TikTok</p>
+  </footer>
+
+  <div class="footer-bar">
+    <a href="about.html">ABOUT</a>
+    <a href="https://www.egyptianmuseum.org" target="_blank">OUR WEBSITES</a>
+    <a href="contact.html">CONTACT</a>
+    <a href="https://www.facebook.com" target="_blank">SOCIAL MEDIA</a>
+  </div>
+
+</body>
+</html>

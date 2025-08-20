@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutankhamun - The Immersive Exhibition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background-color: #8B4513;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pyramid-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .user-section {
+            background-color: white;
+            color: #8B4513;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 250px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300"><rect width="600" height="300" fill="%23654321"/><rect x="0" y="0" width="300" height="150" fill="%23444" opacity="0.3"/><rect x="300" y="150" width="300" height="150" fill="%23222" opacity="0.2"/><circle cx="450" cy="100" r="40" fill="%23DAA520"/><rect x="400" y="200" width="100" height="80" fill="%238B4513"/></svg>') center/cover;
+            position: relative;
+        }
+        
+        .content-section {
+            padding: 20px;
+        }
+        
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .booking-section {
+            text-align: center;
+        }
+        
+        .book-button {
+            background-color: #8B4513;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .tab:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .tab:last-child {
+            border-radius: 0 5px 5px 0;
+            background-color: #A0522D;
+        }
+        
+        .date-section {
+            margin-bottom: 20px;
+        }
+        
+        .date-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .date-field {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .calendar-icon {
+            background-color: #ff6600;
+            color: white;
+            padding: 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .calendar-widget {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .calendar-nav {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            text-align: center;
+        }
+        
+        .calendar-day {
+            padding: 5px;
+            font-size: 11px;
+        }
+        
+        .calendar-day.selected {
+            background-color: #ff6600;
+            color: white;
+            border-radius: 3px;
+        }
+        
+        .nationality-section h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .nationality-options {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nationality-btn {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .nationality-btn.active {
+            background-color: #8B4513;
+            color: white;
+            border-color: #8B4513;
+        }
+        
+        .promo-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .promo-image {
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(45deg, #DAA520, #FF8C00);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .ticket-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .ticket-table {
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        
+        .ticket-table th,
+        .ticket-table td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        
+        .ticket-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            padding: 3px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .total-section {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .form-section {
+            margin-bottom: 20px;
+        }
+        
+        .form-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #333;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .form-row .form-input {
+            flex: 1;
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .payment-method.selected {
+            border-color: #8B4513;
+            background-color: #f5f5f5;
+        }
+        
+        .card-details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background-color: #8B4513;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .footer {
+            background-color: #8B4513;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="pyramid-icon"></div>
+            <span>Museum</span>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                 <li><a href="home.html">Home</a></li>
+                <li><a href="visit.html">Visit</a></li>
+                <li><a href="Events.html">Events</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="opening.html">Opening</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <a href="follow us.html">FolloW Us</a></li>
+            </ul>
+        </nav>
+        <div class="right"><a href="opening.html">Login</a></div>
+            
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <div class="hero-image"></div>
+            <div class="content-section">
+                <h1 class="title">Tutankhamun - The Immersive Exhibition:</h1>
+                <h2 class="subtitle">A Mesmerizing Journey through Ancient Egypt</h2>
+                <p class="description">
+                    Prepare to be transported into the mystical world of ancient Egypt like never before. Our revolutionary immersive experience combines cutting-edge technology with historical authenticity to bring the legendary pharaoh Tutankhamun's tomb to life. Walk through digitally recreated chambers, witness the splendor of golden treasures, and uncover the secrets that have captivated the world for centuries.
+                </p>
+                
+                <div class="booking-section">
+                    <h3 style="margin-bottom: 15px;">Book your Ticket(s)</h3>
+                    <button class="book-button">Ticket(s)</button>
+                    
+                    <div class="tabs">
+                        <button class="tab">Ticket(s)</button>
+                        <button class="tab">Contact details</button>
+                        <button class="tab">Payment</button>
+                    </div>
+                    
+                    <div class="date-section">
+                        <h4 style="text-align: left; margin-bottom: 10px;">Select your visit date Tickets</h4>
+                        <div class="date-input">
+                            <input type="text" class="date-field" value="2024-04-22" readonly>
+                            <span class="calendar-icon">📅</span>
+                        </div>
+                        
+                        <div class="calendar-widget">
+                            <div class="calendar-header">
+                                <button class="calendar-nav">‹</button>
+                                <span>April 2024</span>
+                                <button class="calendar-nav">›</button>
+                            </div>
+                            <div class="calendar-grid">
+                                <div class="calendar-day">S</div>
+                                <div class="calendar-day">M</div>
+                                <div class="calendar-day">T</div>
+                                <div class="calendar-day">W</div>
+                                <div class="calendar-day">T</div>
+                                <div class="calendar-day">F</div>
+                                <div class="calendar-day">S</div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day">1</div>
+                                <div class="calendar-day">2</div>
+                                <div class="calendar-day">3</div>
+                                <div class="calendar-day">4</div>
+                                <div class="calendar-day">5</div>
+                                <div class="calendar-day">6</div>
+                                <div class="calendar-day">7</div>
+                                <div class="calendar-day">8</div>
+                                <div class="calendar-day">9</div>
+                                <div class="calendar-day">10</div>
+                                <div class="calendar-day">11</div>
+                                <div class="calendar-day">12</div>
+                                <div class="calendar-day">13</div>
+                                <div class="calendar-day">14</div>
+                                <div class="calendar-day">15</div>
+                                <div class="calendar-day">16</div>
+                                <div class="calendar-day">17</div>
+                                <div class="calendar-day">18</div>
+                                <div class="calendar-day">19</div>
+                                <div class="calendar-day">20</div>
+                                <div class="calendar-day">21</div>
+                                <div class="calendar-day selected">22</div>
+                                <div class="calendar-day">23</div>
+                                <div class="calendar-day">24</div>
+                                <div class="calendar-day">25</div>
+                                <div class="calendar-day">26</div>
+                                <div class="calendar-day">27</div>
+                                <div class="calendar-day">28</div>
+                                <div class="calendar-day">29</div>
+                                <div class="calendar-day">30</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nationality-section">
+                        <h4>Nationality</h4>
+                        <div class="nationality-options">
+                            <button class="nationality-btn active">Egyptian</button>
+                            <button class="nationality-btn">Other nationality</button>
+                        </div>
+                    </div>
+                    
+                    <div class="promo-section">
+                        <div class="promo-image">
+                            GRAND EGYPTIAN MUSEUM<br>
+                            Opening Soon 2024<br>
+                            🎫 Get your early access tickets now! 🎫
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="ticket-form">
+                <h3 class="form-title">Choose your tickets</h3>
+                
+                <table class="ticket-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket Type</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Adult Regular</td>
+                            <td>$25</td>
+                            <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                            <td>$0</td>
+                        </tr>
+                        <tr>
+                            <td>Senior Citizen</td>
+                            <td>$20</td>
+                            <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                            <td>$0</td>
+                        </tr>
+                        <tr>
+                            <td>Student</td>
+                            <td>$15</td>
+                            <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                            <td>$0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="total-section">
+                    <strong>TOTAL: $0</strong>
+                    <p style="font-size: 11px; color: #666; margin-top: 5px;">
+                        Taxes and fees not included
+                    </p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-row">
+                        <input type="text" class="form-input" placeholder="FIRST NAME">
+                        <input type="text" class="form-input" placeholder="LAST NAME">
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <input type="email" class="form-input" placeholder="EMAIL">
+                </div>
+                
+                <div class="payment-methods">
+                    <div class="payment-method selected">💳</div>
+                    <div class="payment-method">🏛️</div>
+                    <div class="payment-method">👤</div>
+                    <div class="payment-method">🔴</div>
+                </div>
+                
+                <div class="card-details">
+                    <h4 style="margin-bottom: 10px; font-size: 12px;">Card Details</h4>
+                    <input type="text" class="form-input" placeholder="Card Number">
+                    <div class="form-row">
+                        <input type="text" class="form-input" placeholder="MM/YY">
+                        <input type="text" class="form-input" placeholder="CVC">
+                    </div>
+                </div>
+                
+                <button class="submit-btn">Book Now</button>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ABOUT</h4>
+                <ul>
+                    <li><a href="#">Mission</a></li>
+                    <li><a href="#">Vision</a></li>
+                    <li><a href="#">History</a></li>
+                    <li><a href="#">Awards</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>OUR WEBSITES</h4>
+                <ul>
+                    <li><a href="https://egyptianmuseumcairo.eg/ar/">Museum</a></li>
+                    <li><a href="#">Children's Museum</a></li>
+                    <li><a href="#">Virtual Tours</a></li>
+                    <li><a href="#">Archive</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONTACT</h4>
+                <ul>
+                    <li>info@gem.gov.eg</li>
+                    <li>+20 2 33 77 4444</li>
+                    <li>Giza, Egypt</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>SOCIAL MEDIA</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">@</a>
+                    <a href="#" class="social-icon">📱</a>
+                </div>
+                <p style="font-size: 11px; margin-top: 15px;">
+                    Get the latest news and updates from our social media accounts
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <div class="pyramid-icon"></div>
+                <span>© 2024 Grand Egyptian Museum | Built and Powered by GEM IT</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add interactivity
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('input', updateTotal);
+        });
+        
+        document.querySelectorAll('.nationality-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nationality-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        document.querySelectorAll('.calendar-day').forEach(day => {
+            if (day.textContent && !day.classList.contains('selected')) {
+                day.addEventListener('click', function() {
+                    document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            }
+        });
+        
+        function updateTotal() {
+            const prices = [25, 20, 15];
+            let total = 0;
+            const quantities = document.querySelectorAll('.quantity-input');
+            const totals = document.querySelectorAll('.ticket-table tbody td:nth-child(4)');
+            
+            quantities.forEach((input, index) => {
+                const quantity = parseInt(input.value) || 0;
+                const itemTotal = quantity * prices[index];
+                totals[index].textContent = '$' + itemTotal;
+                total += itemTotal;
+            });
+            
+            document.querySelector('.total-section strong').textContent = 'TOTAL: $' + total;
+        }
+    </script>
+</body>
+
+
+</html>
